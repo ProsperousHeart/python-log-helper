@@ -22,4 +22,5 @@ Aside from being easily imported into any repo ...
 1. Leverage built in functions of logger to limit the number of files chosen when starting run
 2. Flexible options for formatting (both console and file)
 3. Have way to email log file(s)
+4. Consider [this](https://docs.python.org/3.12/howto/logging-cookbook.html#how-to-treat-a-logger-like-an-output-stream) when looking to move to a class
 
