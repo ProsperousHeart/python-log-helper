@@ -16,6 +16,7 @@ Aside from being easily imported into any repo ...
 4. Provide way for choice in what logging file is saved
 5. Have some way to show start/end of logging in the file per run
 6. Have formatting show time, file name, function name, and logging level in saved logs (to start)
+7. easy way to show start and stop of log file logs for each run
 
 ## Nice to Have
 
