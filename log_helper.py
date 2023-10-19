@@ -11,6 +11,9 @@ import io
 import functools
 from datetime import date
 
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
+
 today = date.today()
 
 # ===========================================================================
@@ -49,7 +52,7 @@ def create_logger(file_name:str="Test_File",
         filename=f"{log_loc}/{today}_{file_name}.log",
         filemode=file_mode,
         level=file_lvl,
-        format="%(asctime)s %(filename)-10s %(funcName)-12s %(levelname)-8s %(message)s"
+        format="%(asctime)s %(filename)-20s %(funcName)-18s %(levelname)-8s %(message)s"
     )
 
     logger = logging.getLogger(__name__)    # root logger from main script
