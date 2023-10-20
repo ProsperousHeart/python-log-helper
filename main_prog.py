@@ -46,6 +46,9 @@ def main(log_obj:logging.Logger) -> None:
     log_obj.debug("Just an debug item")
     crit_test(log_obj)
 
+    log_obj.info("Final test - a failure!")
+    assert True is False, "Just testing failure! Does it still finish solution wrap?"
+
 
 if __name__ == "__main__":
     main(create_logger("Ext_Test", "w"))
