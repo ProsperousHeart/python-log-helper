@@ -92,11 +92,26 @@ def sol_wrapper(func):
     """
     @functools.wraps(func)
     def log_func_wrapper(*args, **kwargs):
+        """
+        Wraps function around DEBUG lines to say start & end
+        of a solution / script. If the script fails,
+        it will log it then gracefully exit so the logs are
+        finalized when closing.
+        """
         logger = [arg for arg in args if isinstance(arg, logging.Logger)][0]
         logger.debug(f"{'='*3} Starting of Logs {'='*3}")
-        rtn_data = func(*args, **kwargs)
-        logger.debug(f'{"="*3} Ending of Logs {"="*3}')
-        return rtn_data
+        try:
+            rtn_data = func(*args, **kwargs)
+        except Exception as err:            
+            # https://stackoverflow.com/a/7787832/10474024
+            logger.critical(f"""There has been an ERROR!!! Be sure to check your logs:
+            {", ".join([item.baseFilename for item in logger.__dict__['parent'].__dict__['handlers']
+                   if item.__class__.__name__ == "FileHandler"])}""")
+            logger.debug(pprint.pformat(err))
+        else:
+            return rtn_data
+        finally:
+            logger.debug(f'{"="*3} Ending of Logs {"="*3}')
     return log_func_wrapper
 
 @sol_wrapper
