@@ -27,7 +27,7 @@ def create_logger(file_name:str="Test_File",
                   file_mode:str="a",
                   file_lvl:int=logging.DEBUG,
                   console_lvl:int=logging.WARNING,
-                  log_loc:str=f"{os.getcwd()}/logs"):
+                  log_loc:str=f"{os.getcwd()}/logs") -> logging.Logger:
     """
     Takes in the following:
         file_name       STR name of file to write to
@@ -102,7 +102,7 @@ def sol_wrapper(func):
         logger.debug(f"{'='*3} Starting of Logs {'='*3}")
         try:
             rtn_data = func(*args, **kwargs)
-        except Exception as err:            
+        except Exception as err:
             # https://stackoverflow.com/a/7787832/10474024
             logger.critical(f"""There has been an ERROR!!! Be sure to check your logs:
             {", ".join([item.baseFilename for item in logger.__dict__['parent'].__dict__['handlers']
