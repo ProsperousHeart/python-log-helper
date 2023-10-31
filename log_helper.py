@@ -16,6 +16,7 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 today = date.today()
+Configured_Logging_Object = logging.Logger
 
 # ===========================================================================
 # https://docs.python.org/3.12/howto/logging-cookbook.html#how-to-treat-a-logger-like-an-output-stream
@@ -27,7 +28,7 @@ def create_logger(file_name:str="Test_File",
                   file_mode:str="a",
                   file_lvl:int=logging.DEBUG,
                   console_lvl:int=logging.WARNING,
-                  log_loc:str=f"{os.getcwd()}/logs") -> logging.Logger:
+                  log_loc:str=f"{os.getcwd()}/logs") -> Configured_Logging_Object:
     """
     Takes in the following:
         file_name       STR name of file to write to
@@ -115,7 +116,7 @@ def sol_wrapper(func):
     return log_func_wrapper
 
 @sol_wrapper
-def main(log_obj:logging.Logger) -> None:
+def main(log_obj:Configured_Logging_Object) -> None:
     """
     Takes in a logging object pre-defined for formatting
     then runs a few test functions to confirm use.
