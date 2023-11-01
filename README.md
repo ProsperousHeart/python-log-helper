@@ -8,7 +8,7 @@ This `python-log-helper` repo is the culmination of a long standing desire to ma
     - [Must Have](#must-have)
     - [Nice to Have](#nice-to-have)
 - [Current Status](#current-status)
-- Additional Resources
+- [Additional Resources](#additional-resources)
 
 # Business Requirements
 
