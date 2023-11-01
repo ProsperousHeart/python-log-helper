@@ -2,6 +2,14 @@
 
 This `python-log-helper` repo is the culmination of a long standing desire to make logging easier while leveraging decorators.
 
+## Table of Contents
+
+- [Business Requirements](#business-requirements)
+    - [Must Have](#must-have)
+    - [Nice to Have](#nice-to-have)
+- [Current Status](#current-status)
+- Additional Resources
+
 # Business Requirements
 
 Here are the requirements & nice to haves in relation to this project.
@@ -25,3 +33,14 @@ Aside from being easily imported into any repo ...
 3. Have way to email log file(s)
 4. Consider [this](https://docs.python.org/3.12/howto/logging-cookbook.html#how-to-treat-a-logger-like-an-output-stream) when looking to move to a class
 
+
+# Current Status
+
+TBD
+
+
+# Additional Resources
+
+The following were used to build this repo:
+- [PEP 454](https://peps.python.org/pep-0484/) - type hints (see [here](https://docs.python.org/3/library/typing.html) for typing support in python 3)
+- Jupyter Python class [training](https://github.com/ProsperousHeart/TrainingUsingJupyter/blob/master/Python/Python-INTER/01%20-%20Python%20Classes.ipynb)

@@ -3,36 +3,38 @@ import logging
 from log_helper import create_logger
 from log_helper import sol_wrapper, func_wrapper
 
+ConfiguredLoggingObject = logging.Logger
+
 @func_wrapper
-def debug_test(log_obj):
+def debug_test(log_obj:ConfiguredLoggingObject) -> None:
     """
     Function to show usage for DEBUG logging.
     """
     log_obj.debug("TEST:\tDebug function")
 
 @func_wrapper
-def info_test(log_obj):
+def info_test(log_obj:ConfiguredLoggingObject) -> None:
     """
     Function to show usage for INFO logging.
     """
     log_obj.info("TEST:\tInfo function")
 
 @func_wrapper
-def warning_test(log_obj):
+def warning_test(log_obj:ConfiguredLoggingObject) -> None:
     """
     Function to show usage for WARNING logging.
     """
     log_obj.warning("TEST:\tWarning function")
 
 @func_wrapper
-def crit_test(log_obj):
+def crit_test(log_obj:ConfiguredLoggingObject) -> None:
     """
     Function to show usage for CRITICAL logging.
     """
     log_obj.critical("TEST:\tCritical function")
 
 @sol_wrapper
-def main(log_obj:logging.Logger) -> None:
+def main(log_obj:ConfiguredLoggingObject) -> None:
     """
     Main function to kick off the solution
     when run as a script.
@@ -51,4 +53,4 @@ def main(log_obj:logging.Logger) -> None:
 
 
 if __name__ == "__main__":
-    main(create_logger("Ext_Test", "w"))
+    main(create_logger("Ext_Test", "a"))
