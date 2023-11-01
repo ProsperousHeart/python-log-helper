@@ -81,9 +81,15 @@ def func_wrapper(func):
     def log_func_wrapper(*args, **kwargs):
         logger = [arg for arg in args if isinstance(arg, logging.Logger)][0]
         logger.debug(f"Starting {func.__qualname__} from module:\t{func.__module__}")
-        rtn_data = func(*args, **kwargs)
-        logger.debug(f"Ending {func.__qualname__} from module:\t{func.__module__}")
-        return rtn_data
+        try:
+            rtn_data = func(*args, **kwargs)
+        except Exception as err:
+            logger.critical(pprint.pformat(err))
+            raise err
+        else:
+            return rtn_data
+        finally:
+            logger.debug(f"Ending {func.__qualname__} from module:\t{func.__module__}")
     return log_func_wrapper
 
 def sol_wrapper(func):
@@ -106,8 +112,10 @@ def sol_wrapper(func):
         except Exception as err:
             # https://stackoverflow.com/a/7787832/10474024
             logger.critical(f"""There has been an ERROR!!! Be sure to check your logs:
-            {", ".join([item.baseFilename for item in logger.__dict__['parent'].__dict__['handlers']
-                   if item.__class__.__name__ == "FileHandler"])}""")
+            {", ".join([item.baseFilename
+                        for item in logger.__dict__['parent'].__dict__['handlers']
+                        if item.__class__.__name__ == "FileHandler"])
+            }""")
             logger.debug(pprint.pformat(err))
         else:
             return rtn_data
@@ -121,13 +129,13 @@ def main(log_obj:ConfiguredLoggingObject) -> None:
     Takes in a logging object pre-defined for formatting
     then runs a few test functions to confirm use.
     """
-    print("Default choices")
+    # print("Default choices")
     log_obj.debug("This is a debug test ...")
     log_obj.info("This is a info test ...")
     log_obj.warning("This is a warning test ...")
-    print("initial testing done!")
+    # print("initial testing done!")
 
 
 if __name__ == "__main__":
-    logger_obj = create_logger(file_mode="a")   # default
+    logger_obj = create_logger(file_mode="w")   # default
     main(logger_obj)
