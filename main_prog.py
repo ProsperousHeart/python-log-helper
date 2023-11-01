@@ -53,4 +53,4 @@ def main(log_obj:ConfiguredLoggingObject) -> None:
 
 
 if __name__ == "__main__":
-    main(create_logger("Ext_Test", "a"))
+    main(create_logger("Ext_Test", "w"))
