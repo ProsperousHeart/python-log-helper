@@ -50,5 +50,4 @@ if __name__ == "__main__":
             crit_test()
 
 
-        
         main()
