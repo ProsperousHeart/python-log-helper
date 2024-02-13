@@ -217,7 +217,7 @@ class ConfiguredLogger:
         return log_func_wrapper
 
 
-    def sol_wrapper(self, func):
+    def sol_wrapper(self, func, using_exit:bool = False):
         """
         Wrapper function to provide start and end logging
         for entire solution - meant to only run ONCE.
@@ -239,6 +239,9 @@ class ConfiguredLogger:
                 return rtn_data
             finally:
                 self.logger.debug("Ending:\t%s.%s", func.__module__, func.__name__)
+
+                if not using_exit:
+                    self.__exit__(None, None, None)
 
         return sol_func_wrapper
 
