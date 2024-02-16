@@ -259,7 +259,7 @@ func_wrapper = logger_obj.func_wrapper
 sol_wrapper = logger_obj.sol_wrapper
 
 
-@sol_wrapper
+@sol_wrapper(using_exit=False)
 @func_wrapper
 def main() -> None:
     """
