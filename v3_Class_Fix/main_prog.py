@@ -36,7 +36,7 @@ def crit_test() -> None:
 
     assert True is False, "Just testing failure! Does it still finish solution wrap?"
 
-@sol_wrapper
+@sol_wrapper(using_exit=False)
 @func_wrapper
 def main() -> None:
     """
