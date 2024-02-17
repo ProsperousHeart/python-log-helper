@@ -1,6 +1,6 @@
 "'Solution' for testing import of logging helper."
 # import logging
-from v2_Class_Testing.log_helper_class import ConfiguredLogger
+from v3_Class_Fix.log_helper_class import ConfiguredLogger
 
 
 logger_obj = ConfiguredLogger(file_name_in="Test_File_As_Class",
