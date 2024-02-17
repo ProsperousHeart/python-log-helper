@@ -217,33 +217,35 @@ class ConfiguredLogger:
         return log_func_wrapper
 
 
-    def sol_wrapper(self, func, using_exit:bool = False):
+    def sol_wrapper(self, using_exit:bool = False):
         """
         Wrapper function to provide start and end logging
         for entire solution - meant to only run ONCE.
         """
-        @functools.wraps(func)
-        def sol_func_wrapper(*args, **kwargs):
-            """
-            Wraps function around DEBUG lines to say start & end
-            of a solution / script. If the script fails,
-            it will log it then gracefully exit so the logs are
-            finalized when closing.
-            """
+        def actual_decorator(func):
+            @functools.wraps(func)
+            def sol_func_wrapper(*args, **kwargs):
+                """
+                Wraps function around DEBUG lines to say start & end
+                of a solution / script. If the script fails,
+                it will log it then gracefully exit so the logs are
+                finalized when closing.
+                """
 
-            try:
-                rtn_data = func(*args, **kwargs)
-            except Exception as err:
-                self.logger.info("%s exception forced script to close ...", type(err).__name__)
-            else:
-                return rtn_data
-            finally:
-                self.logger.debug("Ending:\t%s.%s", func.__module__, func.__name__)
+                try:
+                    rtn_data = func(*args, **kwargs)
+                except Exception as err:
+                    self.logger.info("%s exception forced script to close ...", type(err).__name__)
+                else:
+                    return rtn_data
+                finally:
+                    self.logger.debug("Ending:\t%s.%s", func.__module__, func.__name__)
 
-                if not using_exit:
-                    self.__exit__(None, None, None)
+                    if not using_exit:
+                        self.__exit__(None, None, None)
 
-        return sol_func_wrapper
+            return sol_func_wrapper
+        return actual_decorator
 
 
 # =========================================
