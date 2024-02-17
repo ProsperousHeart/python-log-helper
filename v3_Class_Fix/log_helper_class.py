@@ -181,7 +181,10 @@ class ConfiguredLogger:
         """
         @functools.wraps(func)
         def log_func_wrapper(*args, **kwargs):
-            # self.logger.debug(f"Starting {func.__qualname__} from module:\t{func.__module__}.{func.__name__}")
+            # self.logger.debug("Starting %s from module:\t%s.%s",
+            #                   func.__qualname__,
+            #                   func.__module__,
+            #                   func.__name__)
             self.logger.debug("Starting:\t%s.%s", func.__module__, func.__name__)
             try:
                 rtn_data = func(*args, **kwargs)
@@ -235,11 +238,14 @@ class ConfiguredLogger:
                 try:
                     rtn_data = func(*args, **kwargs)
                 except Exception as err:
-                    self.logger.info("%s exception forced script to close ...", type(err).__name__)
+                    self.logger.info("%s exception forced script to close ...",
+                                     type(err).__name__)
                 else:
                     return rtn_data
                 finally:
-                    self.logger.debug("Ending:\t%s.%s", func.__module__, func.__name__)
+                    self.logger.debug("Ending:\t%s.%s",
+                                      func.__module__,
+                                      func.__name__)
 
                     if not using_exit:
                         self.__exit__(None, None, None)
@@ -279,31 +285,3 @@ def main() -> None:
 if __name__ == "__main__":
 
     main()
-
-# if __name__ == "__main__":
-#     with ConfiguredLogger(file_name_in="Helper_As_Class_Test_File",
-#                         file_mode="w",
-#                         init_console_setup=1) as conf_logger:
-
-#         log_obj = conf_logger.logger
-#         func_wrapper = conf_logger.func_wrapper
-#         sol_wrapper = conf_logger.sol_wrapper
-
-#         @sol_wrapper
-#         @func_wrapper
-#         def main() -> None:
-#             """
-#             Takes in a logging object pre-defined for formatting
-#             then runs a few test functions to confirm use.
-#             """
-#             # print("Default choices")
-#             log_obj.debug("This is a debug test ...")
-#             log_obj.info("This is a info test ...")
-#             log_obj.warning("This is a warning test ...")
-#             # print("initial testing done!")
-
-#             assert True is False, "Just testing failure! Does it still finish solution wrap?"
-
-
-
-#         main()
