@@ -36,7 +36,13 @@ Aside from being easily imported into any repo ...
 
 # Current Status
 
-TBD
+[v1](./v1/)] was to get everything set up and working as functions.
+
+[v2](./v2_Class_Testing/) was to migrate from functions to classes, with some fixes and improvements along the way.
+
+[v3](./v3_Class_Fix/) was fixing some of the issues found within v2 (like not having modularity).
+
+[v4](./v4_Testing/) was to begin adding testing to the code, but other issues were found while fixing some of the work. Eventually bringing us to where we are now ... where for some reason the console is logging twice on import when it wasn't before. Latest as of 20240217.
 
 
 # Additional Resources
